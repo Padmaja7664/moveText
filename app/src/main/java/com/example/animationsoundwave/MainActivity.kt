@@ -3,6 +3,8 @@ package com.example.animationsoundwave
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
+import android.media.audiofx.Visualizer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -20,6 +22,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import com.bumptech.glide.Glide
 
 private var CardView.cardCornerRadius: Float
     get() = radius
@@ -37,6 +40,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var microphoneImageView: ImageView
     private lateinit var cardView: CardView
+
+    private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var visualizer: Visualizer
 
 
     @SuppressLint("ResourceType", "MissingInflatedId")
@@ -129,10 +135,19 @@ class MainActivity : AppCompatActivity() {
             // Initialize the CardView
             cardView = CardView(this)
 
+            // Replace "your_gif_url_here" with the URL of your GIF or provide the resource ID if it's a local resource.
+            val gifUrl = "https://media1.tenor.com/m/NjavXXAMRD8AAAAC/sound.gif"
+
             val imageView = ImageView(this)
+
+            // Use Glide to load the GIF into the ImageView
+            Glide.with(this)
+                .asGif()
+                .load(gifUrl)
+                .into(imageView)
             // Replace R.drawable.ic_sound_wave with your actual sound wave image resource
-            imageView.setImageResource(R.drawable.wave)
-            imageView.maxHeight = 5
+//            imageView.setImageResource(R.drawable.wave)
+//            imageView.maxHeight = 5
 
             // Set a margin for the CardView
            val margin = resources.getDimensionPixelSize(R.dimen.card_margin)
